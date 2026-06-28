@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — Lost on the path | 迷子</title>
+<style>
+  :root{
+    --navy:#23263c; --ink:#2b2e44; --red:#e23b2f; --red-d:#c12d22;
+    --gold:#f3b73f; --cream:#fbf5ea; --paper:#f6efe2; --muted:#7b7e92;
+    --torii:#e0392c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Inter","Segoe UI",system-ui,-apple-system,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+    color:var(--navy);
+    background:
+      radial-gradient(80% 120% at 88% 10%, #fdeee2 0%, rgba(253,238,226,0) 55%),
+      linear-gradient(155deg,#fbf6ee 0%,#f4ebdc 60%,#efe4d2 100%);
+    min-height:100%;overflow-x:hidden;
+  }
+  /* cinematic grain + vignette overlay */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9;
+    background:radial-gradient(120% 120% at 50% 40%,transparent 60%,rgba(35,38,60,.10) 100%);
+    mix-blend-mode:multiply;
+  }
+  .grain{position:fixed;inset:0;width:100vw;height:100vh;z-index:8;pointer-events:none;opacity:.045;}
+
+  /* top accent bar */
+  .topbar{
+    position:relative;z-index:5;display:flex;align-items:center;gap:10px;
+    padding:18px clamp(20px,5vw,64px);font-size:12.5px;font-weight:700;
+    letter-spacing:.28em;text-transform:uppercase;color:var(--ink);
+  }
+  .topbar .dot{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(226,59,47,.18)}
+  .topbar .jp{margin-left:auto;letter-spacing:.18em;color:var(--muted);font-weight:600}
+
+  .wrap{
+    position:relative;z-index:5;
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+    align-items:center;gap:24px;
+    max-width:1280px;margin:0 auto;padding:8px clamp(20px,5vw,64px) 40px;
+    min-height:calc(100vh - 64px);
+  }
+
+  /* ---------- left : copy ---------- */
+  .kicker{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+  .kicker .bar{width:46px;height:3px;background:var(--red);border-radius:3px}
+  .kicker span{font-size:13px;font-weight:800;letter-spacing:.32em;text-transform:uppercase;color:var(--red)}
+  h1{
+    font-size:clamp(96px,15vw,188px);line-height:.84;font-weight:800;
+    letter-spacing:-.03em;color:var(--ink);display:flex;align-items:center;gap:.04em;
+  }
+  h1 .torii-zero{display:inline-block;width:.74em;height:.84em;transform:translateY(.04em)}
+  .lead{font-size:clamp(22px,2.8vw,32px);font-weight:800;letter-spacing:-.01em;margin-top:24px;text-wrap:balance}
+  .sub{font-size:clamp(15px,1.5vw,17px);line-height:1.65;color:#5d6072;margin-top:14px;max-width:46ch;text-wrap:pretty}
+
+  .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer;
+    font-size:15.5px;font-weight:700;padding:15px 26px;border-radius:14px;border:2px solid transparent;
+    transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease;
+  }
+  .btn svg{width:19px;height:19px}
+  .btn-primary{background:var(--red);color:#fff;box-shadow:0 12px 26px -6px rgba(226,59,47,.55)}
+  .btn-primary:hover{background:var(--red-d);transform:translateY(-2px);box-shadow:0 18px 32px -6px rgba(226,59,47,.6)}
+  .btn-ghost{background:rgba(255,255,255,.55);color:var(--ink);border-color:rgba(43,46,68,.16);backdrop-filter:blur(6px)}
+  .btn-ghost:hover{transform:translateY(-2px);border-color:rgba(43,46,68,.4)}
+
+  .meta{margin-top:40px;display:flex;align-items:center;gap:18px;font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+  .meta .sep{width:1px;height:16px;background:rgba(43,46,68,.2)}
+
+  /* ---------- right : illustration + torii ---------- */
+  .stage{position:relative;height:100%;min-height:540px;display:flex;align-items:flex-end;justify-content:center}
+  .sun-glow{
+    position:absolute;top:6%;right:8%;width:min(46%,360px);aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle,rgba(226,59,47,.30),rgba(226,59,47,0) 68%);
+    filter:blur(6px);z-index:0;
+  }
+  /* receding torii path (far background) */
+  .torii-path{position:absolute;right:2%;bottom:8%;display:flex;align-items:flex-end;gap:6px;opacity:.5;z-index:0}
+  .torii-path svg{display:block}
+  /* hero torii framing the scene */
+  .torii-hero{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:min(98%,620px);z-index:1;filter:drop-shadow(0 18px 30px rgba(35,38,60,.16))}
+  .scene{position:relative;z-index:2;width:min(96%,600px);height:auto;filter:drop-shadow(0 26px 30px rgba(35,38,60,.22))}
+  .ground-shadow{position:absolute;bottom:5%;left:50%;transform:translateX(-50%);width:62%;height:34px;border-radius:50%;
+    background:radial-gradient(ellipse,rgba(35,38,60,.22),rgba(35,38,60,0) 70%);z-index:1}
+
+  /* drifting petals on the copy side */
+  .petals{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+  .petal{position:absolute;top:-24px;width:13px;height:13px;color:var(--red);opacity:0;
+    animation:drop linear infinite;animation-fill-mode:backwards}
+  .petal svg{width:100%;height:100%;display:block}
+  @keyframes drop{
+    0%{transform:translate(0,-10px) rotate(0deg);opacity:0}
+    12%{opacity:.9}
+    88%{opacity:.9}
+    100%{transform:translate(-40px,92vh) rotate(260deg);opacity:0}
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr;gap:0;padding-top:0;min-height:auto;text-align:center}
+    .kicker{justify-content:center}
+    .actions{justify-content:center}
+    .meta{justify-content:center}
+    .sub{margin-left:auto;margin-right:auto}
+    .stage{order:-1;min-height:0;margin:6px 0 18px}
+    h1{justify-content:center}
+  }
+  @media (prefers-reduced-motion:reduce){ .petal{animation:none;display:none} }
+</style>
+</head>
+<body>
+  <!-- film grain -->
+  <svg class="grain" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+
+  <header class="topbar">
+    <span class="dot"></span> JAPAN&nbsp;·&nbsp;ERROR 404
+    <span class="jp">迷子 — まいご</span>
+  </header>
+
+  <main class="wrap">
+    <!-- LEFT : copy -->
+    <section class="copy">
+      <div class="kicker"><i class="bar"></i><span>Page not found</span></div>
+      <h1>4<svg class="torii-zero" viewBox="0 0 200 220" aria-hidden="true">
+            <g fill="#e23b2f">
+              <path d="M8,40 Q12,24 42,29 L158,29 Q188,24 192,40 L192,47 Q150,38 100,38 Q50,38 8,47 Z"/>
+              <rect x="26" y="50" width="148" height="13" rx="2"/>
+              <rect x="92" y="63" width="16" height="20"/>
+              <rect x="30" y="84" width="140" height="16" rx="2"/>
+              <rect x="50" y="63" width="17" height="150" rx="2"/>
+              <rect x="133" y="63" width="17" height="150" rx="2"/>
+            </g>
+          </svg>4</h1>
+      <p class="lead">You've wandered off the path.</p>
+      <p class="sub">Beyond this torii the trail fades into the clouds — and so did the page you were after. Our little Shiba is too busy with ramen to fetch it. Step back through the gate and find your way home.</p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/></svg>
+          Return home
+        </a>
+        <a class="btn btn-ghost" href="javascript:history.back()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+          Go back
+        </a>
+      </div>
+
+      <div class="meta">
+        <span>御探しのページは見つかりません</span>
+        <i class="sep"></i>
+        <span>Lost in the clouds</span>
+      </div>
+    </section>
+
+    <!-- RIGHT : illustration framed by torii -->
+    <section class="stage">
+      <div class="sun-glow"></div>
+
+      <!-- receding torii path -->
+      <div class="torii-path" aria-hidden="true">
+        <svg width="34" height="40" viewBox="0 0 200 220"><g fill="#23263c" opacity=".5"><path d="M8,40 Q12,24 42,29 L158,29 Q188,24 192,40 L192,47 Q150,38 100,38 Q50,38 8,47 Z"/><rect x="26" y="50" width="148" height="13"/><rect x="30" y="84" width="140" height="16"/><rect x="50" y="63" width="17" height="150"/><rect x="133" y="63" width="17" height="150"/></g></svg>
+        <svg width="52" height="60" viewBox="0 0 200 220"><g fill="#3a3e5c" opacity=".7"><path d="M8,40 Q12,24 42,29 L158,29 Q188,24 192,40 L192,47 Q150,38 100,38 Q50,38 8,47 Z"/><rect x="26" y="50" width="148" height="13"/><rect x="30" y="84" width="140" height="16"/><rect x="50" y="63" width="17" height="150"/><rect x="133" y="63" width="17" height="150"/></g></svg>
+      </div>
+
+      <!-- hero torii behind the scene -->
+      <svg class="torii-hero" viewBox="0 0 600 430" aria-hidden="true">
+        <defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8413300"/><stop offset="1" stop-color="#e84133"/></linearGradient></defs>
+        <g fill="#e0392c">
+          <!-- kasagi (curved top beam) -->
+          <path d="M24,86 Q34,40 120,52 L480,52 Q566,40 576,86 L576,98 Q440,72 300,72 Q160,72 24,98 Z"/>
+          <!-- shimaki -->
+          <rect x="84" y="104" width="432" height="26" rx="4"/>
+          <!-- gakuzuka -->
+          <rect x="280" y="130" width="40" height="40" fill="#cc3326"/>
+          <!-- nuki -->
+          <rect x="96" y="172" width="408" height="34" rx="4"/>
+          <!-- pillars -->
+          <rect x="150" y="130" width="44" height="300" rx="5"/>
+          <rect x="406" y="130" width="44" height="300" rx="5"/>
+          <!-- pillar shading -->
+          <rect x="150" y="130" width="14" height="300" rx="5" fill="#cc3326"/>
+          <rect x="406" y="130" width="14" height="300" rx="5" fill="#cc3326"/>
+        </g>
+      </svg>
+
+      <div class="ground-shadow"></div>
+      <img class="scene" src="404-scene-transparent.svg"
+           alt="A Shiba Inu in a kimono eating ramen beneath Mount Fuji with drifting Japanese clouds, the rising sun and the flag of Japan">
+
+      <div class="petals" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <script>
+    // sprinkle a handful of drifting petals over the stage
+    (function(){
+      var host=document.querySelector('.petals');
+      if(!host) return;
+      var SVG='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c3 3 6 6 4 11-1 3-5 5-8 3 2-1 4-4 3-7-1 1-4 2-6 0 2 0 3-3 3-5 0-2 0-1 1-5z" opacity=".9"/></svg>';
+      for(var i=0;i<10;i++){
+        var p=document.createElement('div');p.className='petal';
+        p.style.left=(6+Math.random()*88)+'%';
+        var d=7+Math.random()*6, delay=-(Math.random()*d);
+        p.style.animationDuration=d.toFixed(2)+'s';
+        p.style.animationDelay=delay.toFixed(2)+'s';
+        p.style.width=p.style.height=(9+Math.random()*8)+'px';
+        p.innerHTML=SVG;host.appendChild(p);
+      }
+    })();
+  </script>
+</body>
+</html>
