@@ -10,10 +10,12 @@
     @keyframes drift3 { 0%,100%{transform:translateX(-16px) translateY(0)} 50%{transform:translateX(18px) translateY(-6px)} }
     #sunglow { transform-origin:940px 165px; animation:glow 5s ease-in-out infinite; }
     @keyframes glow { 0%,100%{transform:scale(1);opacity:.18} 50%{transform:scale(1.12);opacity:.30} }
-    #flag { transform-origin:362px 312px; animation:wave 4.5s ease-in-out infinite; }
-    @keyframes wave { 0%,100%{transform:skewX(0deg) skewY(0deg)} 25%{transform:skewX(-6deg) skewY(2deg)} 75%{transform:skewX(6deg) skewY(-2deg)} }
+    #flag { transform-origin:362px 300px; animation:wave 3.6s ease-in-out infinite; }
+    @keyframes wave { 0%,100%{transform:skewY(0deg) scaleX(1)} 28%{transform:skewY(-3.6deg) scaleX(1.03)} 58%{transform:skewY(2.6deg) scaleX(.975)} 82%{transform:skewY(-1.4deg) scaleX(1.012)} }
     .petal { animation-name:fall; animation-timing-function:linear; animation-iteration-count:infinite; }
     @keyframes fall { 0%{transform:translate(0,0) rotate(0deg);opacity:0} 10%{opacity:1} 90%{opacity:1} 100%{transform:translate(-26px,210px) rotate(220deg);opacity:0} }
+    .birdGlide { animation-name:birdGlide; animation-timing-function:ease-in-out; animation-iteration-count:infinite; }
+    @keyframes birdGlide { 0%,100%{transform:translate(0,0)} 25%{transform:translate(11px,-6px)} 50%{transform:translate(24px,3px)} 75%{transform:translate(11px,-4px)} }
     .steam { transform-origin:center; animation:steam 3.2s ease-in-out infinite; }
     @keyframes steam { 0%{opacity:0;transform:translateY(6px) scaleY(.8)} 35%{opacity:.55} 100%{opacity:0;transform:translateY(-26px) scaleY(1.15)} }
   </style>
@@ -24,11 +26,15 @@
     <stop offset="0" stop-color="#e9f1f2"/><stop offset=".55" stop-color="#f4ece0"/><stop offset="1" stop-color="#fdf6ec"/>
   </linearGradient>
   <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#f7cb46"/><stop offset="1" stop-color="#ed7c2c"/>
+    <stop offset="0" stop-color="#f9cf3c"/><stop offset=".5" stop-color="#f3a82c"/><stop offset="1" stop-color="#e9761f"/>
   </linearGradient>
   <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0" stop-color="#f3c63f"/><stop offset="1" stop-color="#eab12f"/>
   </linearGradient>
+  <clipPath id="fujiClip">
+    <path d="M300,558 C430,470 515,330 600,250 C685,330 770,470 900,558 Z"/>
+  </clipPath>
+  <clipPath id="capRight"><rect x="610" y="228" width="220" height="220"/></clipPath>
   <symbol id="cloudA" viewBox="0 0 1188 438" overflow="visible"><g transform="translate(0.000000,438.000000) scale(0.100000,-0.100000)"
 fill="#fdf9f0" stroke="none">
 <path d="M1867 4296 c-551 -314 -856 -884 -835 -1562 3 -85 2 -154 -1 -154 -3
@@ -128,7 +134,7 @@ fill="#2f3048" stroke="none">
  
   <circle id="sunglow" cx="940" cy="165" r="92" fill="#ec3b30" opacity=".22"/>
   <circle cx="940" cy="165" r="62" fill="#ec3b30"/>
-  <path d="M778,150 q6,-7 12,0 q6,-7 12,0" fill="none" stroke="#2b2e44" stroke-width="2.4" stroke-linecap="round"/><path d="M700,128 q4.800000000000001,-5.6000000000000005 9.600000000000001,0 q4.800000000000001,-5.6000000000000005 9.600000000000001,0" fill="none" stroke="#2b2e44" stroke-width="2.4" stroke-linecap="round"/>
+  <g class="birdGlide" style="animation-duration:7.5s;animation-delay:0s"><path d="M770,150 q6.3,-7.4 12.6,0 q6.3,-7.4 12.6,0" fill="none" stroke="#2b2e44" stroke-width="2.5" stroke-linecap="round"><animate attributeName="d" dur="0.85s" begin="0s" repeatCount="indefinite" values="M770,150 q6.3,-11.6 12.6,0 q6.3,-11.6 12.6,0;M770,150 q6.3,-7.4 12.6,0 q6.3,-7.4 12.6,0;M770,150 q6.3,-3.7 12.6,0 q6.3,-3.7 12.6,0;M770,150 q6.3,-7.4 12.6,0 q6.3,-7.4 12.6,0;M770,150 q6.3,-11.6 12.6,0 q6.3,-11.6 12.6,0" keyTimes="0;0.25;0.5;0.75;1" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></path></g><g class="birdGlide" style="animation-duration:9s;animation-delay:1.3s"><path d="M692,126 q4.8,-5.6 9.6,0 q4.8,-5.6 9.6,0" fill="none" stroke="#2b2e44" stroke-width="1.9" stroke-linecap="round"><animate attributeName="d" dur="0.85s" begin="1.3s" repeatCount="indefinite" values="M692,126 q4.8,-8.8 9.6,0 q4.8,-8.8 9.6,0;M692,126 q4.8,-5.6 9.6,0 q4.8,-5.6 9.6,0;M692,126 q4.8,-2.8 9.6,0 q4.8,-2.8 9.6,0;M692,126 q4.8,-5.6 9.6,0 q4.8,-5.6 9.6,0;M692,126 q4.8,-8.8 9.6,0 q4.8,-8.8 9.6,0" keyTimes="0;0.25;0.5;0.75;1" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></path></g><g class="birdGlide" style="animation-duration:8s;animation-delay:2.4s"><path d="M826,182 q4.2,-4.9 8.4,0 q4.2,-4.9 8.4,0" fill="none" stroke="#2b2e44" stroke-width="1.7" stroke-linecap="round"><animate attributeName="d" dur="0.85s" begin="2.4s" repeatCount="indefinite" values="M826,182 q4.2,-7.7 8.4,0 q4.2,-7.7 8.4,0;M826,182 q4.2,-4.9 8.4,0 q4.2,-4.9 8.4,0;M826,182 q4.2,-2.4 8.4,0 q4.2,-2.4 8.4,0;M826,182 q4.2,-4.9 8.4,0 q4.2,-4.9 8.4,0;M826,182 q4.2,-7.7 8.4,0 q4.2,-7.7 8.4,0" keyTimes="0;0.25;0.5;0.75;1" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></path></g>
 
  
   <g class="drift1"><use href="#cloudA" x="120" y="60"  width="310" height="114"/></g>
@@ -141,15 +147,14 @@ fill="#2f3048" stroke="none">
 
  
   <path d="M300,558 C430,470 515,330 600,250 C685,330 770,470 900,558 Z" fill="#2b2e44"/>
-  <path d="M600,256
-           C582,300 562,338 540,362
-           C549,372 556,358 565,367
-           C574,376 581,357 591,367
-           C600,376 609,357 619,367
-           C628,376 635,358 644,366
-           C651,358 654,372 660,362
-           C638,338 618,300 600,256 Z" fill="url(#snow)"/>
-  <path d="M600,256 C588,290 575,322 560,352" fill="none" stroke="#fde6c2" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+  <g clip-path="url(#fujiClip)">
+    <path d="M440,232 L760,232 L760,300 L704.0,360.0 Q688.0,350.0 678.0,368.0 Q668.0,386.0 659.0,371.0 Q650.0,356.0 640.0,381.0 Q630.0,406.0 620.0,378.0 Q610.0,350.0 600.0,374.0 Q590.0,398.0 580.0,375.0 Q570.0,352.0 560.0,379.0 Q550.0,406.0 541.0,375.0 Q532.0,344.0 523.5,359.0 Q515.0,374.0 507.5,361.0 L500.0,348.0 L440,300 Z" fill="url(#snow)"/>
+    <path d="M440,232 L760,232 L760,300 L704.0,360.0 Q688.0,350.0 678.0,368.0 Q668.0,386.0 659.0,371.0 Q650.0,356.0 640.0,381.0 Q630.0,406.0 620.0,378.0 Q610.0,350.0 600.0,374.0 Q590.0,398.0 580.0,375.0 Q570.0,352.0 560.0,379.0 Q550.0,406.0 541.0,375.0 Q532.0,344.0 523.5,359.0 Q515.0,374.0 507.5,361.0 L500.0,348.0 L440,300 Z" fill="#d2641b" opacity=".18" clip-path="url(#capRight)"/>
+    <path d="M600,258 C588,292 574,322 558,352 C563,352 569,350 573,345
+             C585,317 597,290 607,263 Z" fill="#ffe57e" opacity=".85"/>
+    <path d="M548,318 C556,338 549,352 556,372" fill="none" stroke="#ffe57e" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+    <path d="M648,322 C642,342 651,356 644,376" fill="none" stroke="#d2641b" stroke-width="3" stroke-linecap="round" opacity=".4"/>
+  </g>
 
  
   <path d="M0,560 C200,548 380,566 600,556 C820,547 1010,566 1200,556 L1200,820 L0,820 Z" fill="url(#ground)"/>
@@ -168,11 +173,18 @@ fill="#2f3048" stroke="none">
 
  
   <g>
-    <circle cx="362" cy="300" r="7" fill="#f3c63f" stroke="#2b2e44" stroke-width="2"/>
-    <rect x="359" y="306" width="6" height="262" rx="3" fill="#8d93a0"/>
+    <rect x="357" y="258" width="6" height="318" rx="3" fill="#8d93a0"/>
+    <rect x="357" y="258" width="2.4" height="318" rx="1.2" fill="#6f757f"/>
+    <circle cx="360" cy="255" r="6.5" fill="#2b2e44"/>
+    <circle cx="358" cy="253" r="2" fill="#5a5f6b"/>
     <g id="flag">
-      <path d="M365,312 q40,-6 78,2 q-8,16 0,34 q-40,-8 -78,-2 Z" fill="#fbf5ea" stroke="#2b2e44" stroke-width="2.5"/>
-      <circle cx="404" cy="332" r="13" fill="#ec3b30"/>
+      <path d="M362,270 C392,261 414,281 441,272 C452,269 459,277 456,287
+               C451,301 460,317 452,329 C426,338 402,320 378,331
+               C372,333 367,332 362,332 Z"
+            fill="#f3e8d4" stroke="#2b2e44" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M441,272 C452,287 451,312 452,329 C446,331 440,330 434,331
+               C443,312 441,290 436,277 Z" fill="#e1cfb1"/>
+      <ellipse cx="405" cy="301" rx="13.5" ry="12.5" fill="#ec3b30"/>
     </g>
   </g>
 
