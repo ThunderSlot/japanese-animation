@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — Lost in the clouds</title>
+<style>
+  :root{
+    --navy:#2b2e44; --ink:#2f3048; --red:#e6392c; --red-d:#c12d22;
+    --gold:#f3c63f; --cream:#fbf5ea;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Segoe UI",system-ui,-apple-system,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+    color:var(--navy);
+    background:radial-gradient(120% 90% at 50% 0%,#eef4f3 0%,#f5ede1 55%,#fdf6ec 100%);
+    min-height:100%;
+    display:flex;align-items:safe center;justify-content:center;
+    padding:40px 20px;
+  }
+  .card{width:100%;max-width:980px;text-align:center}
+
+  .eyebrow{
+    display:inline-block;letter-spacing:.34em;text-transform:uppercase;
+    font-size:13px;font-weight:700;color:var(--red);
+    padding:7px 16px;border:2px solid rgba(230,57,44,.25);border-radius:999px;
+    background:rgba(255,255,255,.5);margin-bottom:18px;
+  }
+  h1{
+    font-size:clamp(78px,17vw,168px);line-height:.92;font-weight:800;
+    letter-spacing:.02em;color:var(--navy);
+  }
+  h1 .zero{color:var(--red);text-shadow:0 6px 0 rgba(43,46,68,.10)}
+  .lead{font-size:clamp(19px,2.6vw,26px);font-weight:700;margin-top:6px;text-wrap:balance}
+  .sub{font-size:clamp(14px,1.9vw,17px);color:#6b6f80;margin-top:10px;line-height:1.6;
+    max-width:54ch;margin-left:auto;margin-right:auto;text-wrap:pretty}
+
+  .art{margin:6px auto 26px;width:100%;max-width:880px}
+  .art img{display:block;width:100%;height:auto;
+    filter:drop-shadow(0 26px 34px rgba(43,46,68,.16))}
+
+  .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:4px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:16px;font-weight:700;text-decoration:none;cursor:pointer;
+    padding:14px 26px;border-radius:14px;border:2px solid transparent;
+    transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+  }
+  .btn-primary{background:var(--red);color:#fff;box-shadow:0 10px 20px rgba(230,57,44,.28)}
+  .btn-primary:hover{background:var(--red-d);transform:translateY(-2px);box-shadow:0 14px 26px rgba(230,57,44,.34)}
+  .btn-ghost{background:#fff;color:var(--navy);border-color:rgba(43,46,68,.16)}
+  .btn-ghost:hover{transform:translateY(-2px);border-color:rgba(43,46,68,.34)}
+  .btn svg{width:18px;height:18px}
+
+  footer{margin-top:30px;font-size:12.5px;color:#9aa0ad}
+  @media (max-width:560px){ h1{letter-spacing:0} .eyebrow{letter-spacing:.22em} }
+  @media (prefers-reduced-motion:reduce){ .art img{filter:drop-shadow(0 16px 22px rgba(43,46,68,.14))} }
+</style>
+</head>
+<body>
+  <main class="card">
+    <span class="eyebrow">Page not found</span>
+    <h1>4<span class="zero">0</span>4</h1>
+    <p class="lead">This page wandered off to Japan.</p>
+    <p class="sub">While our little Shiba slurps ramen under Mount Fuji, the page you were looking for drifted away with the clouds. Let's get you back on the trail.</p>
+
+    <div class="art">
+      <img src="404-scene.svg" alt="A Shiba Inu in a kimono eating ramen on a bench beneath Mount Fuji, with drifting Japanese clouds, a red sun, the flag of Japan and falling sakura petals">
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/></svg>
+        Back to home
+      </a>
+      <a class="btn btn-ghost" href="javascript:history.back()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        Go back
+      </a>
+    </div>
+
+    <footer>エラー 404 · お探しのページは見つかりませんでした</footer>
+  </main>
+</body>
+</html>
